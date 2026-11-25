@@ -17,8 +17,7 @@ def save_mp4(frame_list, fps, resolution):
         out.write(frame_open)
     out.release()
 
-def after_death(fps, resolution, frame_list, lock, after_death_second):
+def after_death(fps, resolution, after_death_second, buffer):
     time.sleep(after_death_second)
-    with lock:
-        list_copy = frame_list.copy()
-    save_mp4(list_copy, fps, resolution)
+    copy = buffer.copied()
+    save_mp4(copy, fps, resolution)

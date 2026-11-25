@@ -23,7 +23,7 @@ def player_death_score(json_dic):
     except KeyError:
         return (None, None)
     
-def api(fps, resolution, url:str, after_death_second, after_death, d, lock, flag):
+def api(fps, resolution, url:str, after_death_second, after_death, flag, buffer):
     previous_death_score = None
     while not flag.is_set():
         try:
@@ -41,7 +41,7 @@ def api(fps, resolution, url:str, after_death_second, after_death, d, lock, flag
                     elif death_score > previous_death_score:
                         print(f"Öldün! (Toplam:{death_score})")
                         previous_death_score = death_score
-                        threading.Thread(target=after_death, args=(fps, resolution, d,lock, after_death_second), daemon=True).start()
+                        threading.Thread(target=after_death, args=(fps, resolution, after_death_second, buffer), daemon=True).start()
 
         except requests.exceptions.ConnectTimeout:
             print("Hata Maça Bağlanılamadı (exceptions.ConnecTimeout)")

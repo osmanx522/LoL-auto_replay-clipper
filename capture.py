@@ -12,7 +12,7 @@ def frame_capture(sct, resolution):
     resize_screenshot = cv2.resize(bgr_color_array, resolution, interpolation=cv2.INTER_AREA)
     return resize_screenshot
 
-def frame_collections(fps, resolution, jpeg_quality, queue, lock, flag): # ekran görüntüsünü sıra sıra çeker ve kuyruğa ekler
+def frame_collections(fps, resolution, jpeg_quality, flag, buffer): # ekran görüntüsünü sıra sıra çeker ve kuyruğa ekler
     with mss.MSS() as sct:
         elapsed_time = time.perf_counter()
         frame_count = 0
@@ -20,11 +20,10 @@ def frame_collections(fps, resolution, jpeg_quality, queue, lock, flag): # ekran
             t0 = time.perf_counter()
             frame = frame_capture(sct, resolution)
             ok, paket = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, jpeg_quality])
-            with lock:
-                queue.append(paket)
+            buffer.added(paket)
             frame_count +=1
             if time.perf_counter() - elapsed_time >= 1:
-                print(f"FPS:{frame_count} | TargetFPS:{fps} | Queue:{len(queue)}")
+                print(f"FPS:{frame_count} | TargetFPS:{fps} | Queue:{len(buffer)}")
                 frame_count = 0
                 elapsed_time = time.perf_counter()
             t_difference = time.perf_counter() - t0
