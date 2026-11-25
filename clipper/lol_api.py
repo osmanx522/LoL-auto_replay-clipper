@@ -1,7 +1,7 @@
 import requests
 import time
 import urllib3
-import config
+import clipper.config as config
 
 urllib3.disable_warnings()
 

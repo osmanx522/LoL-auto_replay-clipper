@@ -1,10 +1,10 @@
 import time
 import threading
-import config
-from capture import frame_collections
-from lol_api import api
-from video import video_creator
-from buffer import Buffer
+import clipper.config as config
+from clipper.capture import frame_collections
+from clipper.lol_api import api
+from clipper.video import video_creator
+from clipper.buffer import Buffer
 
 buffer_ = Buffer(config.FPS * config.SECOND) 
 #thread

@@ -2,7 +2,7 @@ import mss
 import cv2
 import time
 import numpy as np
-import config 
+import clipper.config as config 
 
 def frame_capture(sct, resolution):
     sct: mss.MSS # Tip belirtici

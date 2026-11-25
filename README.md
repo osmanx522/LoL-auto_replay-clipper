@@ -24,7 +24,7 @@ Oyun verisi Riot'un resmi **Live Client Data API**'sinden okunur. Bu API maç s�
 ```bash
 python -m venv venv
 venv\Scripts\activate
-pip install requests urllib3 mss opencv-python numpy
+pip install -r requirements.txt
 ```
 
 ## Kullanım
@@ -33,6 +33,8 @@ pip install requests urllib3 mss opencv-python numpy
 python main.py
 ```
 
+Program her zaman proje kök klasöründen çalıştırılmalıdır.
+
 1. Programı çalıştır, ardından bir maça (veya Practice Tool'a) gir.
 2. Öldüğünde veya kill aldığında klip otomatik olarak `klipler/` klasörüne kaydedilir.
 3. Kapatmak için terminalde `Ctrl+C`'ye bas.
@@ -40,13 +42,13 @@ python main.py
 Klip adları şu formattadır:
 
 ```
-LOL[death]-26_11_2026_153012_482913.mp4
-LOL[kill]-26_11_2026_153145_120934.mp4
+LOL[death]-2026_11_26_153012_482913.mp4
+LOL[kill]-2026_11_26_153145_120934.mp4
 ```
 
 ## Ayarlar
 
-Tüm ayarlar `config.py` dosyasındadır.
+Tüm ayarlar `clipper/config.py` dosyasındadır.
 
 | Ayar | Açıklama | Varsayılan |
 |---|---|---|
@@ -61,12 +63,18 @@ Varsayılan ayarlarla bir klip olaydan önceki 17 saniyeyi ve sonraki 3 saniyeyi
 ## Proje Yapısı
 
 ```
-main.py      Programın giriş noktası. Tamponu ve thread'leri oluşturur, Ctrl+C'yi bekler.
-config.py    Tüm ayarlar.
-lol_api.py   Live Client Data API'ye bağlanır, ölüm ve kill olaylarını algılar.
-capture.py   Ekranı yakalar, küçültür, sıkıştırır ve tampona ekler.
-buffer.py    Thread-safe döngüsel tampon (deque + Lock).
-video.py     Tampondaki kareleri .mp4 dosyasına yazar.
+.
+├── main.py              Programın giriş noktası. Tamponu ve thread'leri oluşturur, Ctrl+C'yi bekler.
+├── requirements.txt     Gerekli Python kütüphaneleri.
+├── README.md
+├── clipper/             Uygulama paketi
+│   ├── __init__.py
+│   ├── config.py        Tüm ayarlar.
+│   ├── lol_api.py       Live Client Data API'ye bağlanır, ölüm ve kill olaylarını algılar.
+│   ├── capture.py       Ekranı yakalar, küçültür, sıkıştırır ve tampona ekler.
+│   ├── buffer.py        Thread-safe döngüsel tampon (deque + Lock).
+│   └── video.py         Tampondaki kareleri .mp4 dosyasına yazar.
+└── klipler/             Kaydedilen klipler (program ilk klipte otomatik oluşturur).
 ```
 
 ## Nasıl Çalışır
