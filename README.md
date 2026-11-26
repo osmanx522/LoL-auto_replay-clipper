@@ -52,13 +52,13 @@ Tüm ayarlar `clipper/config.py` dosyasındadır.
 
 | Ayar | Açıklama | Varsayılan |
 |---|---|---|
-| `FPS` | Saniyedeki kare sayısı | `30` |
+| `FPS` | Saniyedeki kare sayısı | `24` |
 | `SECOND` | Klibin toplam uzunluğu (saniye) | `20` |
-| `AFTER_EVENT_SECOND` | Olaydan sonra kayda devam edilen süre (saniye) | `3` |
+| `AFTER_EVENT_SECOND` | Olaydan sonra kayda devam edilen süre (saniye) | `5` |
 | `RESOLUTION` | Klip çözünürlüğü (genişlik, yükseklik) | `(1280, 800)` |
 | `JPEG_QUALITY` | RAM'deki karelerin sıkıştırma kalitesi (0-100) | `70` |
 
-Varsayılan ayarlarla bir klip olaydan önceki 17 saniyeyi ve sonraki 3 saniyeyi içerir.
+Varsayılan ayarlarla bir klip olaydan önceki 15 saniyeyi ve sonraki 5 saniyeyi içerir.
 
 ## Proje Yapısı
 
